@@ -1,30 +1,27 @@
 class Solution {
     public String minWindow(String s, String t) {
-        Map<Character, Integer> map1 = new HashMap<>();
+        int[] arr1 = new int[58];
         for(char ch : t.toCharArray())
-            map1.put(ch, map1.getOrDefault(ch, 0) + 1);
-        Map<Character, Integer> map2 = new HashMap<>();
-        int i = 0, j = 0, count = 0;
+            arr1[ch - 'A']++;
+        int[] arr2 = new int[58];
+        int i = 0, j = 0, count = 0, ai = 0, aj = 0, len = t.length();
         String ans = "";
         while(j < s.length()){
-            char ch = s.charAt(j);
-            map2.put(ch, map2.getOrDefault(ch, 0) + 1);
-            if(map1.containsKey(ch) && map1.get(ch) >= map2.get(ch))
+            int ch = s.charAt(j) - 'A';
+            if(arr1[ch] >= ++arr2[ch])
                 count++;
-            while(count == t.length()){
-                if(ans.equals("") || ans.length() > j - i + 1)
-                    ans = s.substring(i, j + 1);
-                char beg = s.charAt(i);
-                if(map2.get(beg) == 1)
-                    map2.remove(beg);
-                else
-                    map2.put(beg, map2.get(beg) - 1);
-                if(map2.getOrDefault(beg, 0) < map1.getOrDefault(beg, 0))
+            while(count == len){
+                if(aj == ai || aj - ai > j - i + 1){
+                    ai = i;
+                    aj = j + 1;
+                }
+                int beg = s.charAt(i) - 'A';
+                if(--arr2[beg] < arr1[beg])
                     count--;
                 i++;
             }
             j++;
         }
-        return ans;
+        return s.substring(ai, aj);
     }
 }
