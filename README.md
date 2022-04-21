@@ -1,1 +1,1 @@
-# LeetCode-Monthly-Challenge
+# LeetCode-Daily-Challenge
