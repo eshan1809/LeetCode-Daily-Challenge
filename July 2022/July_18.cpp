@@ -8,7 +8,7 @@ public:
         for(int b = 0; b < m; b++){
             for(int e = b; e < m; e++){
                 int sum = 0;
-                map<int, int> mp;
+                unordered_map<int, int> mp;
                 mp[0] = 1;
                 for(int i = 0; i < n; i++){
                     sum += matrix[i][e] - (b == 0 ? 0 : matrix[i][b - 1]);
