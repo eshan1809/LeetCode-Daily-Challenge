@@ -11,7 +11,7 @@ public:
                 arr[ch - '0']--;
             bool flag = true;
             for(int j = 0; j < 10; j++)
-                if(arr[i] != 0){
+                if(arr[j] != 0){
                     flag = false;
                     break;
                 }
